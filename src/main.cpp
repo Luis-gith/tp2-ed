@@ -1,16 +1,34 @@
 #include <iostream>
 #include "node.hpp"
 
-int main(int argc, char const *argv[]) {
-  int size = atoi(argv[1]);
-  Graph* graph = new Graph(size);
-  Node* graphMembers = graph->getMembers();
+int main() {
+  int numVertices;
+  std::cin >> numVertices;
 
-  for (int i = 0; i < size; i++) {
-    graphMembers[i].setLabel(1);
-  }
+  Graph* graph = new Graph(numVertices);
 
-  delete graph;
+  for (int i = 0; i < numVertices; i++) {
+    int numneighbours;
+    std::cin >> numneighbours;
 
-  return 0;
+    for (int j = 0; j < numneighbours; j++) {
+      int neighborId;
+      std::cin >> neighborId;
+      graph->getMembers()[i].addNeighbour(neighborId);
+    }
+}
+
+for (int i = 0; i < numVertices; i++) {
+  int colour;
+  std::cin >> colour;
+  graph->getMembers()[i].setColour(colour);
+}
+
+for (int i = 0; i < numVertices; i++) {
+  std:: cout << graph->getMembers()[i].getColour() << std::endl;
+}
+
+delete graph;
+
+return 0;
 }

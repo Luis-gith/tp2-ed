@@ -8,10 +8,15 @@ class Node {
   public:
     Node();
     void setLabel(int newLabel);
+    void addNeighbour(int neighbourId);
+    int getColour();
+    void setColour(int newColour);
+
   private:
     int label;
     int colour;
-    Node* neighbours;
+    int* neighbours;
+    int numNeighbours;
 };
 
 class Graph {
