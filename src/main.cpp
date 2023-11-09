@@ -1,5 +1,6 @@
 #include <iostream>
 #include "node.hpp"
+#include "graph.hpp"
 
 int main() {
   int numVertices;

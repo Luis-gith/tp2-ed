@@ -19,15 +19,4 @@ class Node {
     int numNeighbours;
 };
 
-class Graph {
-  public:
-    Graph(int size);
-    ~Graph();
-    Node* getMembers();
-
-  private:
-    int size;
-    Node* members;
-};
-
 #endif

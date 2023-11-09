@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/node.o $(OBJ)/main.o 
-HDRS =$(INC)/node.hpp 
+OBJS = $(OBJ)/node.o $(OBJ)/graph.o $(OBJ)/main.o 
+HDRS =$(INC)/node.hpp $(INC)/graph.hpp
 CFLAGS = -Wall -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -20,6 +20,9 @@ $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	
 $(OBJ)/node.o: $(HDRS) $(SRC)/node.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/node.o $(SRC)/node.cpp
+
+$(OBJ)/graph.o: $(HDRS) $(SRC)/graph.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/graph.o $(SRC)/graph.cpp
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
