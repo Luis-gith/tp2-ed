@@ -9,6 +9,7 @@ class Graph {
     Graph(int size);
     ~Graph();
     Node* getMembers();
+    void bubbleSort();
 
   private:
     int size;
@@ -17,3 +18,4 @@ class Graph {
 
 
 #endif
+

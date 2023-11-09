@@ -8,10 +8,10 @@ Node::Node() {
 }
 
 void Node::setLabel(int newLabel) {
-  label = newLabel;
+  this->label = newLabel;
 }
 
-void Node::addNeighbour(int neighborId) {
+void Node::addNeighbour(int auxLabel) {
   if (neighbours == nullptr) neighbours = new int[1];
    
   else {
@@ -23,9 +23,21 @@ void Node::addNeighbour(int neighborId) {
     neighbours = temp;
   }
 
-  neighbours[numNeighbours++] = neighborId;
+  neighbours[numNeighbours++] = auxLabel;
 }
 
 int Node::getColour() {
   return this->colour;
+}
+
+int Node::getLabel() {
+  return this->label;
+}
+
+int* Node::getNeighbours() {
+  return this->neighbours;
+}
+
+int Node::getNumNeighbours() {
+  return this->numNeighbours;
 }
