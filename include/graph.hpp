@@ -10,6 +10,11 @@ class Graph {
     ~Graph();
     Node* getMembers();
     void bubbleSort();
+    void selectionSort();
+    void insertionSort();
+    void quickSort();
+    void mergeSort();
+    void heapSort();
 
   private:
     int size;
