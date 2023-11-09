@@ -9,12 +9,17 @@ class Graph {
     Graph(int size);
     ~Graph();
     Node* getMembers();
+    bool greedy();
     void bubbleSort();
     void selectionSort();
     void insertionSort();
-    void quickSort();
-    void mergeSort();
-    void heapSort();
+
+    void quickSort(int down, int up);
+    int partition(int down, int up);
+
+    void merge(int left, int mid, int right);
+    void mergeSort(int left, int right);
+
 
   private:
     int size;

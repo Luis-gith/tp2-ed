@@ -38,34 +38,38 @@ int main() {
   }
 
   std::cout << std::endl;
+  if(!graph->greedy()){
+    return 0;
+  } 
+  else {
+    switch (mode) {
+      case 'b':
+        graph->bubbleSort();
+        break;
 
-  switch (mode) {
-    case 'b':
-      graph->bubbleSort();
-      break;
+      case 's':
+        graph->selectionSort();
+        break;
 
-    case 's':
-      graph->selectionSort();
-      break;
-/*
-    case 'i':
-      graph->insertionSort();
-      break;
+      case 'i':
+        graph->insertionSort();
+        break;
 
-    case 'q':
-      graph->quickSort();
-      break;
+      case 'q':
+        graph->quickSort( 0, (numVertices - 1) );
+        break;
 
-    case 'm':
-      graph->mergeSort();
-      break;
+      case 'm':
+        graph->mergeSort( 0, (numVertices - 1) );
+        break;
 
-    case 'p':
-      graph->heapSort();
-      break;*/
+      /*case 'p':
+        graph->heapSort();
+        break;*/
 
-    default:
-      break;
+      default:
+        break;
+    }
   }
 
   for(int i = 0; i < numVertices; i++) 
@@ -101,6 +105,16 @@ b 5
 2 0 3
 1 2 1 3 2
 r: 0 2 1 4 3
+
+p 6
+3 1 2 3
+3 0 2 4
+3 0 1 5
+1 0
+1 1
+1 2
+1 2 3 2 1 1
+r: 0 4 5 1 3 2
 
 */
 

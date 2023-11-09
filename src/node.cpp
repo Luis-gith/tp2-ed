@@ -22,7 +22,7 @@ void Node::addNeighbour(int auxLabel) {
     delete[] neighbours;
     neighbours = temp;
   }
-
+  
   neighbours[numNeighbours++] = auxLabel;
 }
 
