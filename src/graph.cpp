@@ -1,7 +1,5 @@
 #include "node.hpp"
 #include "graph.hpp"
-#include <cstring>
-
 
 void Node::setColour(int newColour) {
   colour = newColour;
@@ -33,75 +31,23 @@ int Graph::getSize(){
   return this->size;
 }
 
-bool Graph::greedy() {
-    // Array to keep track of used colors for each vertex
-    int* usedColors = new int[size];
-
-    for (int i = 0; i < size; i++) {
-        Node& current = members[i];
-
-        // Initialize used colors for the current vertex
-        memset(usedColors, 0, size * sizeof(int));
-
-        // Iterate through neighbors and mark their colors as used
-        for (int j = 0; j < current.getNumNeighbours(); j++) {
-            int neighborId = current.getNeighbours()[j];
-            int neighborColor = members[neighborId].getColour();
-            usedColors[neighborColor] = 1;
-        }
-
-        // Find the first available color for the current node
-        int availableColor = 0;
-        while (usedColors[availableColor] == 1) {
-            availableColor++;
-        }
-
-        // Set the color for the current node
-        current.setColour(availableColor);
-    }
-
-    delete[] usedColors;
-
-    // Check for conflicts after coloring
-    for (int i = 0; i < size; i++) {
-        Node& current = members[i];
-
-        for (int j = 0; j < current.getNumNeighbours(); j++) {
-            int neighborId = current.getNeighbours()[j];
-            if (current.getColour() == members[neighborId].getColour()) {
-                // Invalid coloring, as adjacent vertices have the same color
-                return false;
-            }
-        }
-    }
-
-    // If no conflicts were found, the coloring is valid
-    return true;
-}
-
-
-
 
 void Graph::bubbleSort() {
- for (int i = 0; i < size - 1; i++) {
-    int minIndex = i;
-    for (int j = i + 1; j < size; j++) {
+  for (int i = 0; i < size - 1; i++) {
+    for (int j = 0; j < size - i - 1; j++) {
       int color1 = members[j].getColour();
-      int color2 = members[minIndex].getColour();
-      if (color1 < color2) {
-        minIndex = j;
-      }
+      int color2 = members[j + 1].getColour();
+
+      if (color1 > color2) std::swap(members[j], members[j + 1]);
+
       else if (color1 == color2) {
-        if (members[j].getLabel() < members[minIndex].getLabel()) {
-          minIndex = j;
-        }
+        if (members[j].getLabel() > members[j + 1].getLabel())
+          std::swap(members[j], members[j + 1]);
       }
-    }
-    if (minIndex != i) {
-      std::swap(members[i], members[minIndex]);
     }
   }
 }
+
 
 void Graph::selectionSort() {
   for (int i = 0; i < size - 1; i++) {
@@ -109,6 +55,7 @@ void Graph::selectionSort() {
     for (int j = i + 1; j < size; j++) {
       int color1 = members[j].getColour();
       int color2 = members[minIndex].getColour();
+
       if (color1 < color2) {
         minIndex = j;
       }
@@ -118,11 +65,13 @@ void Graph::selectionSort() {
         }
       }
     }
+
     if (minIndex != i) {
       std::swap(members[i], members[minIndex]);
     }
   }
 }
+
 
 void Graph::insertionSort() {
   for (int i = 1; i < size; i++) {

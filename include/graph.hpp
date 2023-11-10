@@ -10,7 +10,6 @@ class Graph {
     ~Graph();
     Node* getMembers();
     int getSize();
-    bool greedy();
     void bubbleSort();
     void selectionSort();
     void insertionSort();

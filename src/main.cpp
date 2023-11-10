@@ -38,7 +38,7 @@ int main() {
 
   std::cout << std::endl;
 
-  if(!graph->greedy()){
+  if(0){
     std::cout << 0 << std::endl;
   } 
   else {
@@ -108,7 +108,7 @@ b 5
 1 2 1 3 2
 r: 0 2 1 4 3
 
-p 6
+m 6
 3 1 2 3
 3 0 2 4
 3 0 1 5
@@ -127,7 +127,8 @@ q 6
 1 2
 1 2 3 3 1 1
 r: 0
-*/
 
-/*for(int i = 0; i < graph->getMembers()[1].getNumNeighbours(); i++)
-  std::cout << graph->getMembers()[1].getNeighbours()[i] << " " << std::endl;*/
+
+
+b s i q m implemented
+*/
