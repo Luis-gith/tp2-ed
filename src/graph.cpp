@@ -27,26 +27,40 @@ Node* Graph::getMembers() {
   return this->members;
 }
 
-bool Graph::greedy() {
-  for (int i = 0; i < size; i++) {
-    Node& currentNode = members[i];
-    int currentNodeColor = currentNode.getColour();
+int Graph::getSize(){
+  return this->size;
+}
 
-    for (int j = 0; j < currentNode.getNumNeighbours(); j++) {
-      int neighborId = currentNode.getNeighbours()[j];
-      if (neighborId >= 0 && neighborId < size) {
-        int neighborColor = members[neighborId].getColour();
-        if (neighborColor == currentNodeColor) {
-          // A conflict is found, the current coloring is not greedy
-          return false;
-        }
-      }
-    }
+int* Graph::getColourN(int label) {
+  Node aux = this->getMembers()[label];
+  int* colours;
+  for(int i = 0; i < aux.getNumNeighbours(); i++){
+    colours[i] = aux.getNeighbours()[i];
+  }
+}
+
+
+bool Graph::greedy() {
+  Node aux[this->getSize()];
+  for (int i = 0; i < this->getSize(); i++) {
+    aux[i] = this->getMembers()[i];
   }
 
-  // No conflicts found, the current coloring is a valid greedy coloring
+  
+  for(int i = 0; i < this->getSize(); i++){
+    aux->addNeighbour(this->getMembers()[i].getNeighbours()[i]);
+  }
+
+  for(int i = 0; i < this->getSize(); i++){
+    for (int j = 0; j < aux[i].getNumNeighbours(); j++) {
+      if(aux[i].getColour() < aux[i].getNeighbours()[j])
+        return false;
+    }
+    
+  }
   return true;
 }
+
 
 
 void Graph::bubbleSort() {

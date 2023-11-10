@@ -38,10 +38,12 @@ int main() {
   }
 
   std::cout << std::endl;
-  if(!graph->greedy()){
-    return 0;
+
+  if(/*graph->greedy() == false*/0){
+    std::cout << 0 << std::endl;
   } 
   else {
+    std::cout << 1 << " ";
     switch (mode) {
       case 'b':
         graph->bubbleSort();
@@ -70,18 +72,22 @@ int main() {
       default:
         break;
     }
+
+    for(int i = 0; i < numVertices; i++) 
+    std::cout << graph->getMembers()[i].getLabel() << " ";
   }
 
-  for(int i = 0; i < numVertices; i++) 
-    std::cout << graph->getMembers()[i].getLabel() << " ";
+  graph->getMembers()[1].getNeighbours()[1];
+  // this->getMembers()[i].getNeighbours()[i];
     
   std::cout << std::endl;
-
 
   delete graph;
 
   return 0;
 }
+
+
 /*
 
 TESTES 
@@ -116,6 +122,15 @@ p 6
 1 2 3 2 1 1
 r: 0 4 5 1 3 2
 
+q 6
+3 1 2 3
+3 0 2 4
+3 0 1 5
+1 0
+1 1
+1 2
+1 2 3 3 1 1
+r: 0
 */
 
 /*for(int i = 0; i < graph->getMembers()[1].getNumNeighbours(); i++)

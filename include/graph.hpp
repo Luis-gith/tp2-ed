@@ -9,11 +9,13 @@ class Graph {
     Graph(int size);
     ~Graph();
     Node* getMembers();
+    int getSize();
+    int* getColourN(int label);
     bool greedy();
     void bubbleSort();
     void selectionSort();
     void insertionSort();
-
+    
     void quickSort(int down, int up);
     int partition(int down, int up);
 

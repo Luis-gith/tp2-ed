@@ -12,13 +12,13 @@ class Node {
     void addNeighbour(int neighbourId);
     int getColour();
     void setColour(int newColour);
-    int* getNeighbours();
+    int * getNeighbours();
     int getNumNeighbours();
-
+  
   private:
     int label;
     int colour;
-    int* neighbours;
+    int * neighbours;
     int numNeighbours;
 };
 

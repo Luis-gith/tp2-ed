@@ -41,3 +41,5 @@ int* Node::getNeighbours() {
 int Node::getNumNeighbours() {
   return this->numNeighbours;
 }
+
+
