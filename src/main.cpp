@@ -38,7 +38,7 @@ int main() {
 
   std::cout << std::endl;
 
-  if(/*graph->greedy() == false*/0){
+  if(!graph->greedy()){
     std::cout << 0 << std::endl;
   } 
   else {
