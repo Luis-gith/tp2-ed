@@ -31,14 +31,6 @@ int Graph::getSize(){
   return this->size;
 }
 
-int* Graph::getColourN(int label) {
-  Node aux = this->getMembers()[label];
-  int* colours;
-  for(int i = 0; i < aux.getNumNeighbours(); i++){
-    colours[i] = aux.getNeighbours()[i];
-  }
-}
-
 
 bool Graph::greedy() {
   Node aux[this->getSize()];

@@ -6,7 +6,6 @@ int main() {
   char mode;
   int numVertices;
   std::cin >> mode >> numVertices;
-  //std::cin >> numVertices;
 
   Graph* graph = new Graph(numVertices);
 
@@ -76,9 +75,6 @@ int main() {
     for(int i = 0; i < numVertices; i++) 
     std::cout << graph->getMembers()[i].getLabel() << " ";
   }
-
-  graph->getMembers()[1].getNeighbours()[1];
-  // this->getMembers()[i].getNeighbours()[i];
     
   std::cout << std::endl;
 
