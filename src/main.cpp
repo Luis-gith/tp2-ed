@@ -8,6 +8,7 @@ int main() {
   std::cin >> mode >> numVertices;
 
   Graph* graph = new Graph(numVertices);
+ // Graph* originalGraph = new Graph(numVertices);
 
   for(int i = 0; i < numVertices; i++){
     graph->getMembers()[i].setLabel(i);
@@ -24,25 +25,14 @@ int main() {
     }
 }
 
+//seta cores
   for (int i = 0; i < numVertices; i++) {
     int colour;
     std::cin >> colour;
     graph->getMembers()[i].setColour(colour);
   }
+  //originalGraph = graph;
 
-  for (int i = 0; i < numVertices; i++) {
-    std:: cout << "Label: "<< graph->getMembers()[i].getLabel() << 
-    " colour: " <<
-    graph->getMembers()[i].getColour() << std::endl;
-  }
-
-  std::cout << std::endl;
-
-  if(0){
-    std::cout << 0 << std::endl;
-  } 
-  else {
-    std::cout << 1 << " ";
     switch (mode) {
       case 'b':
         graph->bubbleSort();
@@ -65,17 +55,25 @@ int main() {
         break;
 
       /*case 'p':
-        graph->heapSort();
-        break;*/
+          graph->heapSort();
+          break;
+        
+        case 'y';
+          graph->belascoSort();
+          breaki;
+        */
 
       default:
         break;
     }
+    if(graph->greedy()){
+      std::cout << 1 << " ";
+      for(int i = 0; i < numVertices; i++) 
+      std::cout << graph->getMembers()[i].getLabel() << " ";
+    }
+    else std::cout << 0;
 
-    for(int i = 0; i < numVertices; i++) 
-    std::cout << graph->getMembers()[i].getLabel() << " ";
-  }
-    
+
   std::cout << std::endl;
 
   delete graph;

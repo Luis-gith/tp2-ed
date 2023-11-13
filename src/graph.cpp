@@ -1,9 +1,7 @@
 #include "node.hpp"
 #include "graph.hpp"
 
-void Node::setColour(int newColour) {
-  colour = newColour;
-}
+
 
 Graph::Graph(int size) {
   this->size = size;
@@ -31,7 +29,14 @@ int Graph::getSize(){
   return this->size;
 }
 
+Node Graph::getByLabel(int label) {
+  int i = 0;
+  while(this->getMembers()[i].getLabel() != label)  
+    i++;
+  return this->getMembers()[i];
+}
 
+//working
 void Graph::bubbleSort() {
   for (int i = 0; i < size - 1; i++) {
     for (int j = 0; j < size - i - 1; j++) {
@@ -46,9 +51,22 @@ void Graph::bubbleSort() {
       }
     }
   }
+    //percorre membros do grafo
+  /*for (int i = 0; i < this->getSize(); i++) {
+    //impressão de membro
+      std::cout << std::endl;
+    std::cout << "membro " << i << " tem cor: " << this->getMembers()[i].getColour() << std::endl;
+
+    //percorre vizinhos de cada membro
+    for(int j = 0; j < this->getMembers()[i].getNumNeighbours(); j++)  {
+      //impressão de vizinhos
+      int vizinho = this->getMembers()[i].getNeighbours()[j];
+      std::cout << "o vizinho: "<< vizinho << " possui cor: " << this->getMembers()[vizinho].getColour() << ", ";
+    }
+  }*/
 }
 
-
+//working
 void Graph::selectionSort() {
   for (int i = 0; i < size - 1; i++) {
     int minIndex = i;
@@ -72,7 +90,7 @@ void Graph::selectionSort() {
   }
 }
 
-
+//working
 void Graph::insertionSort() {
   for (int i = 1; i < size; i++) {
     Node current = members[i];
@@ -88,6 +106,7 @@ void Graph::insertionSort() {
   }
 }
 
+//working
 //needed for quicksort
 int Graph::partition(int down, int up) {
   Node pivot = members[up];
@@ -116,6 +135,7 @@ void Graph::quickSort(int down, int up) {
   }
 }
 
+//working
 //needed for mergesort
 void Graph::merge(int left, int mid, int right) {
   int n1 = mid - left + 1;
@@ -165,6 +185,7 @@ void Graph::merge(int left, int mid, int right) {
   delete[] R;
 }
 
+//working
 void Graph::mergeSort(int left, int right) {
   if (left < right) {
     int mid = left + (right - left) / 2;
@@ -174,4 +195,69 @@ void Graph::mergeSort(int left, int right) {
 
     merge(left, mid, right);
   }
+}
+
+
+/*bool Graph::greedy() {
+
+  for(int i = 0; i < this->getSize(); i++)  {
+    Node noAtual = this->getMembers()[i];
+    int corAtual = noAtual.getColour();
+    //int corVizinhos[noAtual.getNumNeighbours()];
+    std::cout <<  "cor de " << noAtual.getLabel() << ": " << corAtual << std::endl <<" vizinhos: ";
+    for (int j = 0; j < noAtual.getNumNeighbours(); j++) {
+      Node vizinho = this->getMembers()[noAtual.getNeighbours()[j]];
+      ///int corVizinho = vizinho.getColour();
+      //std::cout << corVizinho << " ";
+      std::cout << vizinho.getLabel();
+    }
+    std::cout << std::endl;
+  }
+  return true;
+  
+}*/
+
+/*bool Graph::greedy() {
+  //std::cout << this->getMembers()[3].getNeighbours()[0] << " " << this->getMembers()[3].getNeighbours()[1];
+  for(int i = 0; i < this->getSize(); i++)  {
+    Node noAtual = this->getMembers()[i];
+    int corAtual = noAtual.getColour();
+    //std::cout <<  "cor de " << noAtual.getLabel() << ": " << corAtual 
+    //  << std::endl <<" vizinhos: " << noAtual.getNeighbours()[i];
+
+    //std::cout << std::endl;
+  }
+  return true;
+  
+}*/
+
+
+
+bool Graph::greedy() {
+    for (int i = 0; i < this->getSize(); i++) {
+        Node* verticeAtual = &(this->getMembers()[i]);
+        int corAtual = verticeAtual->getColour();
+        int corEsperada = 1;
+
+        while (corEsperada < corAtual) {
+            bool encontrouCor = false;
+
+            for (int j = 0; j < verticeAtual->getNumNeighbours(); j++) {
+                int vizinhoLabel = verticeAtual->getNeighbours()[j];
+                Node vizinho = this->getByLabel(vizinhoLabel);
+
+                if (vizinho.getColour() == corEsperada) {
+                    encontrouCor = true;
+                    break;
+                }
+            }
+
+            if (!encontrouCor) {
+                return false;
+            }
+
+            corEsperada++;
+        }
+    }
+    return true;
 }

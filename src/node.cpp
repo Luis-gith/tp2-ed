@@ -5,25 +5,15 @@ Node::Node() {
   this->colour = 0;
   this->neighbours = nullptr;
   this->numNeighbours = 0;
+  this->visited = false;
 }
 
 void Node::setLabel(int newLabel) {
   this->label = newLabel;
 }
 
-void Node::addNeighbour(int auxLabel) {
-  if (neighbours == nullptr) neighbours = new int[1];
-   
-  else {
-    int* temp = new int[numNeighbours + 1];
-    for (int i = 0; i < numNeighbours; i++) 
-      temp[i] = neighbours[i];
-
-    delete[] neighbours;
-    neighbours = temp;
-  }
-  
-  neighbours[numNeighbours++] = auxLabel;
+void Node::setColour(int newColour) {
+  this->colour = newColour;
 }
 
 int Node::getColour() {
@@ -41,5 +31,31 @@ int* Node::getNeighbours() {
 int Node::getNumNeighbours() {
   return this->numNeighbours;
 }
+
+void Node::setVisited(bool v) {
+  this->visited = v;
+}
+
+bool Node::getVisited(){
+  return this->visited;
+}
+
+
+void Node::addNeighbour(int auxLabel) {
+  if (neighbours == nullptr) neighbours = new int[1];
+   
+  else {
+    int* temp = new int[numNeighbours + 1];
+    for (int i = 0; i < numNeighbours; i++) 
+      temp[i] = neighbours[i];
+
+    delete[] neighbours;
+    neighbours = temp;
+  }
+  
+  neighbours[numNeighbours++] = auxLabel;
+}
+
+
 
 
