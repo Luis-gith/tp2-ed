@@ -14,15 +14,12 @@ class Node {
     void setColour(int newColour);
     int * getNeighbours();
     int getNumNeighbours();
-    void setVisited(bool v);
-    bool getVisited();
   
   private:
     int label;
     int colour;
     int * neighbours;
     int numNeighbours;
-    bool visited;
 };
 
 #endif

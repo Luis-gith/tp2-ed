@@ -14,6 +14,7 @@ class Graph {
     void bubbleSort();
     void selectionSort();
     void insertionSort();
+    void insertionSort(int left, int right);
     
     void quickSort(int down, int up);
     int partition(int down, int up);
@@ -23,6 +24,8 @@ class Graph {
 
     void heapify(int n, int i);
     void heapSort();
+
+    void timSort();
 
     bool greedy();
 

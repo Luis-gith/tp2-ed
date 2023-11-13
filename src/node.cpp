@@ -5,7 +5,6 @@ Node::Node() {
   this->colour = 0;
   this->neighbours = nullptr;
   this->numNeighbours = 0;
-  this->visited = false;
 }
 
 void Node::setLabel(int newLabel) {
@@ -31,15 +30,6 @@ int* Node::getNeighbours() {
 int Node::getNumNeighbours() {
   return this->numNeighbours;
 }
-
-void Node::setVisited(bool v) {
-  this->visited = v;
-}
-
-bool Node::getVisited(){
-  return this->visited;
-}
-
 
 void Node::addNeighbour(int auxLabel) {
   if (neighbours == nullptr) neighbours = new int[1];

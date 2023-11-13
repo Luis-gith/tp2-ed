@@ -24,46 +24,45 @@ int main() {
     }
 }
 
-//seta cores
   for (int i = 0; i < numVertices; i++) {
     int colour;
     std::cin >> colour;
     graph->getMembers()[i].setColour(colour);
   }
 
-    switch (mode) {
-      case 'b':
-        graph->bubbleSort();
-        break;
+  switch (mode) {
+    case 'b':
+      graph->bubbleSort();
+      break;
 
-      case 's':
-        graph->selectionSort();
-        break;
+    case 's':
+      graph->selectionSort();
+      break;
 
-      case 'i':
-        graph->insertionSort();
-        break;
+    case 'i':
+      graph->insertionSort();
+      break;
 
-      case 'q':
-        graph->quickSort( 0, (numVertices - 1) );
-        break;
+    case 'q':
+      graph->quickSort( 0, (numVertices - 1) );
+      break;
 
-      case 'm':
-        graph->mergeSort( 0, (numVertices - 1) );
-        break;
+    case 'm':
+      graph->mergeSort( 0, (numVertices - 1) );
+      break;
 
-      case 'p':
-          graph->heapSort();
-          break;
-        /*
-        case 'y';
-          graph->belascoSort();
-          breaki;
-        */
-
-      default:
+    case 'p':
+        graph->heapSort();
         break;
-    }
+      
+    case 'y':
+      graph->timSort();
+      break;
+      
+
+    default:
+      break;
+  }
     if(graph->greedy()){
       std::cout << 1 << " ";
       for(int i = 0; i < numVertices; i++) 

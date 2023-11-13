@@ -1,8 +1,6 @@
 #include "node.hpp"
 #include "graph.hpp"
 
-
-
 Graph::Graph(int size) {
   this->size = size;
   this->members = new Node[size];
@@ -31,8 +29,8 @@ int Graph::getSize(){
 
 Node Graph::getByLabel(int label) {
   int i = 0;
-  while(this->getMembers()[i].getLabel() != label)  
-    i++;
+  while(this->getMembers()[i].getLabel() != label) i++;
+
   return this->getMembers()[i];
 }
 
@@ -40,30 +38,17 @@ Node Graph::getByLabel(int label) {
 void Graph::bubbleSort() {
   for (int i = 0; i < size - 1; i++) {
     for (int j = 0; j < size - i - 1; j++) {
-      int color1 = members[j].getColour();
-      int color2 = members[j + 1].getColour();
+      int colour1 = members[j].getColour();
+      int colour2 = members[j + 1].getColour();
 
-      if (color1 > color2) std::swap(members[j], members[j + 1]);
+      if (colour1 > colour2) std::swap(members[j], members[j + 1]);
 
-      else if (color1 == color2) {
+      else if (colour1 == colour2) {
         if (members[j].getLabel() > members[j + 1].getLabel())
           std::swap(members[j], members[j + 1]);
       }
     }
   }
-    //percorre membros do grafo
-  /*for (int i = 0; i < this->getSize(); i++) {
-    //impressão de membro
-      std::cout << std::endl;
-    std::cout << "membro " << i << " tem cor: " << this->getMembers()[i].getColour() << std::endl;
-
-    //percorre vizinhos de cada membro
-    for(int j = 0; j < this->getMembers()[i].getNumNeighbours(); j++)  {
-      //impressão de vizinhos
-      int vizinho = this->getMembers()[i].getNeighbours()[j];
-      std::cout << "o vizinho: "<< vizinho << " possui cor: " << this->getMembers()[vizinho].getColour() << ", ";
-    }
-  }*/
 }
 
 //working
@@ -71,13 +56,13 @@ void Graph::selectionSort() {
   for (int i = 0; i < size - 1; i++) {
     int minIndex = i;
     for (int j = i + 1; j < size; j++) {
-      int color1 = members[j].getColour();
-      int color2 = members[minIndex].getColour();
+      int colour1 = members[j].getColour();
+      int colour2 = members[minIndex].getColour();
 
-      if (color1 < color2) {
+      if (colour1 < colour2) {
         minIndex = j;
       }
-      else if (color1 == color2) {
+      else if (colour1 == colour2) {
         if (members[j].getLabel() < members[minIndex].getLabel()) {
           minIndex = j;
         }
@@ -113,10 +98,10 @@ int Graph::partition(int down, int up) {
   int i = down - 1;
 
   for (int j = down; j <= up - 1; j++) {
-    int color1 = members[j].getColour();
-    int color2 = pivot.getColour();
+    int colour1 = members[j].getColour();
+    int colour2 = pivot.getColour();
 
-    if (color1 < color2 || (color1 == color2 && members[j].getLabel() < pivot.getLabel())) {
+    if (colour1 < colour2 || (colour1 == colour2 && members[j].getLabel() < pivot.getLabel())) {
       i++;
       std::swap(members[i], members[j]);
     }
@@ -138,16 +123,16 @@ void Graph::quickSort(int down, int up) {
 //working
 //needed for mergesort
 void Graph::merge(int left, int mid, int right) {
-  int n1 = mid - left + 1;
-  int n2 = right - mid;
+  int nodeLSize = mid - left + 1;
+  int nodeRSize = right - mid;
 
-  Node* L = new Node[n1];
-  Node* R = new Node[n2];
+  Node* L = new Node[nodeLSize];
+  Node* R = new Node[nodeRSize];
 
-  for (int i = 0; i < n1; i++) {
+  for (int i = 0; i < nodeLSize; i++) {
     L[i] = members[left + i];
   }
-  for (int j = 0; j < n2; j++) {
+  for (int j = 0; j < nodeRSize; j++) {
     R[j] = members[mid + 1 + j];
   }
 
@@ -155,11 +140,11 @@ void Graph::merge(int left, int mid, int right) {
   int j = 0;
   int k = left;
 
-  while (i < n1 && j < n2) {
-    int color1 = L[i].getColour();
-    int color2 = R[j].getColour();
+  while (i < nodeLSize && j < nodeRSize) {
+    int colour1 = L[i].getColour();
+    int colour2 = R[j].getColour();
 
-    if (color1 < color2 || (color1 == color2 && L[i].getLabel() < R[j].getLabel())) {
+    if (colour1 < colour2 || (colour1 == colour2 && L[i].getLabel() < R[j].getLabel())) {
       members[k] = L[i];
       i++;
     } else {
@@ -169,13 +154,13 @@ void Graph::merge(int left, int mid, int right) {
     k++;
   }
 
-  while (i < n1) {
+  while (i < nodeLSize) {
     members[k] = L[i];
     i++;
     k++;
   }
 
-  while (j < n2) {
+  while (j < nodeRSize) {
     members[k] = R[j];
     j++;
     k++;
@@ -198,83 +183,113 @@ void Graph::mergeSort(int left, int right) {
 }
 
 void Graph::heapify(int n, int i) {
-    int smallest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+  int smallest = i;
+  int left = 2 * i + 1;
+  int right = 2 * i + 2;
 
-    // Compare with left child
-    if (left < n &&
-        (members[left].getColour() < members[smallest].getColour() ||
-         (members[left].getColour() == members[smallest].getColour() &&
-          members[left].getLabel() < members[smallest].getLabel()))) {
-        smallest = left;
-    }
+  if (left < n &&
+    (members[left].getColour() < members[smallest].getColour() ||
+      (members[left].getColour() == members[smallest].getColour() &&
+      members[left].getLabel() < members[smallest].getLabel()))) {
+    smallest = left;
+  }
 
-    // Compare with right child
-    if (right < n &&
-        (members[right].getColour() < members[smallest].getColour() ||
-         (members[right].getColour() == members[smallest].getColour() &&
-          members[right].getLabel() < members[smallest].getLabel()))) {
-        smallest = right;
-    }
+  if (right < n &&
+    (members[right].getColour() < members[smallest].getColour() ||
+      (members[right].getColour() == members[smallest].getColour() &&
+      members[right].getLabel() < members[smallest].getLabel()))) {
+    smallest = right;
+  }
 
-    if (smallest != i) {
-        std::swap(members[i], members[smallest]);
-        heapify(n, smallest);
-    }
+  if (smallest != i) {
+    std::swap(members[i], members[smallest]);
+    heapify(n, smallest);
+  }
 }
 
 void Graph::heapSort() {
-    int n = getSize();
+  int n = getSize();
 
-    // Build min heap (rearrange array)
-    for (int i = n / 2 - 1; i >= 0; i--) {
-        heapify(n, i);
+  for (int i = n / 2 - 1; i >= 0; i--) 
+    heapify(n, i);
+  
+
+  for (int i = n - 1; i > 0; i--) {
+    std::swap(members[0], members[i]);
+    heapify(i, 0);
+  }
+
+  int start = 0, end = this->getSize() -1;
+  while (start < end) {
+    std::swap(members[start], members[end]);
+    start++;
+    end--;
+  }
+  
+}
+
+//needed for timsort
+void Graph::insertionSort(int left, int right) {
+    for (int i = left + 1; i <= right; i++) {
+        Node current = members[i];
+        int j = i - 1;
+
+        // Compare based on color and label
+        while (j >= left &&
+               (members[j].getColour() > current.getColour() ||
+                (members[j].getColour() == current.getColour() &&
+                 members[j].getLabel() > current.getLabel()))) {
+            members[j + 1] = members[j];
+            j--;
+        }
+
+        members[j + 1] = current;
+    }
+}
+void Graph::timSort() {
+    int n = this->getSize();
+    const int minRun = 32;
+
+    // Sort individual subarrays of size minRun using Insertion Sort
+    for (int i = 0; i < n; i += minRun) {
+        insertionSort(i, std::min((i + minRun - 1), (n - 1)));
     }
 
-    // Extract elements from the heap one by one
-    for (int i = n - 1; i > 0; i--) {
-        std::swap(members[0], members[i]);
-        heapify(i, 0);
-    }
+    // Merge the sorted runs
+    for (int size = minRun; size < n; size = 2 * size) {
+        for (int left = 0; left < n; left += 2 * size) {
+            int mid = left + size - 1;
+            int right = std::min((left + 2 * size - 1), (n - 1));
 
-    int start = 0, end = this->getSize() -1;
-    while (start < end)
-    {
-      std::swap(members[start], members[end]);
-      start++;
-      end--;
+            merge(left, mid, right);
+        }
     }
-    
 }
 
 
-
 bool Graph::greedy() {
-    for (int i = 0; i < this->getSize(); i++) {
-        Node* verticeAtual = &(this->getMembers()[i]);
-        int corAtual = verticeAtual->getColour();
-        int corEsperada = 1;
+  for (int i = 0; i < this->getSize(); i++) {
+    Node* currentNode = &(this->getMembers()[i]);
+    int currentColour = currentNode->getColour();
+    int refColour = 1;
 
-        while (corEsperada < corAtual) {
-            bool encontrouCor = false;
+    while (refColour < currentColour) {
+      bool colourFound = false;
 
-            for (int j = 0; j < verticeAtual->getNumNeighbours(); j++) {
-                int vizinhoLabel = verticeAtual->getNeighbours()[j];
-                Node vizinho = this->getByLabel(vizinhoLabel);
+      for (int j = 0; j < currentNode->getNumNeighbours(); j++) {
+        int neighbourLabel = currentNode->getNeighbours()[j];
+        Node vizinho = this->getByLabel(neighbourLabel);
 
-                if (vizinho.getColour() == corEsperada) {
-                    encontrouCor = true;
-                    break;
-                }
-            }
-
-            if (!encontrouCor) {
-                return false;
-            }
-
-            corEsperada++;
+        if (vizinho.getColour() == refColour) {
+          colourFound = true;
+          break;
         }
+      }
+
+      if (!colourFound) return false;
+
+      refColour++;
     }
-    return true;
+  }
+  return true;
 }
