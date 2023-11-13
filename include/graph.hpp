@@ -21,6 +21,9 @@ class Graph {
     void merge(int left, int mid, int right);
     void mergeSort(int left, int right);
 
+    void heapify(int n, int i);
+    void heapSort();
+
     bool greedy();
 
   private:

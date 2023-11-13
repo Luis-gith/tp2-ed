@@ -197,39 +197,56 @@ void Graph::mergeSort(int left, int right) {
   }
 }
 
+void Graph::heapify(int n, int i) {
+    int smallest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
 
-/*bool Graph::greedy() {
-
-  for(int i = 0; i < this->getSize(); i++)  {
-    Node noAtual = this->getMembers()[i];
-    int corAtual = noAtual.getColour();
-    //int corVizinhos[noAtual.getNumNeighbours()];
-    std::cout <<  "cor de " << noAtual.getLabel() << ": " << corAtual << std::endl <<" vizinhos: ";
-    for (int j = 0; j < noAtual.getNumNeighbours(); j++) {
-      Node vizinho = this->getMembers()[noAtual.getNeighbours()[j]];
-      ///int corVizinho = vizinho.getColour();
-      //std::cout << corVizinho << " ";
-      std::cout << vizinho.getLabel();
+    // Compare with left child
+    if (left < n &&
+        (members[left].getColour() < members[smallest].getColour() ||
+         (members[left].getColour() == members[smallest].getColour() &&
+          members[left].getLabel() < members[smallest].getLabel()))) {
+        smallest = left;
     }
-    std::cout << std::endl;
-  }
-  return true;
-  
-}*/
 
-/*bool Graph::greedy() {
-  //std::cout << this->getMembers()[3].getNeighbours()[0] << " " << this->getMembers()[3].getNeighbours()[1];
-  for(int i = 0; i < this->getSize(); i++)  {
-    Node noAtual = this->getMembers()[i];
-    int corAtual = noAtual.getColour();
-    //std::cout <<  "cor de " << noAtual.getLabel() << ": " << corAtual 
-    //  << std::endl <<" vizinhos: " << noAtual.getNeighbours()[i];
+    // Compare with right child
+    if (right < n &&
+        (members[right].getColour() < members[smallest].getColour() ||
+         (members[right].getColour() == members[smallest].getColour() &&
+          members[right].getLabel() < members[smallest].getLabel()))) {
+        smallest = right;
+    }
 
-    //std::cout << std::endl;
-  }
-  return true;
-  
-}*/
+    if (smallest != i) {
+        std::swap(members[i], members[smallest]);
+        heapify(n, smallest);
+    }
+}
+
+void Graph::heapSort() {
+    int n = getSize();
+
+    // Build min heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(n, i);
+    }
+
+    // Extract elements from the heap one by one
+    for (int i = n - 1; i > 0; i--) {
+        std::swap(members[0], members[i]);
+        heapify(i, 0);
+    }
+
+    int start = 0, end = this->getSize() -1;
+    while (start < end)
+    {
+      std::swap(members[start], members[end]);
+      start++;
+      end--;
+    }
+    
+}
 
 
 
