@@ -7,10 +7,6 @@ Graph::Graph(int size) {
   this->size = size;
   this->members = new Node[size];
 
-  if (!this->members)
-    throw std::bad_alloc();  // Memory allocation failed
-
-
   for (int i = 0; i < size; i++)
     this->members[i].neighbours = nullptr;
   
@@ -107,8 +103,6 @@ int Graph::partition(int down, int up) {
   int i = down - 1;
 
   for (int j = down; j <= up - 1; j++) {
-    if (i < 0 || i >= size || j < 0 || j >= size) 
-        throw std::out_of_range("Array index out of bounds");
     int colour1 = this->members[j].getColour();
     int colour2 = pivot.getColour();
 
@@ -247,8 +241,6 @@ void Graph::insertionSort(int left, int right) {
                 (this->members[j].getColour() == current.getColour() &&
                  this->members[j].getLabel() > current.getLabel()))) {
 
-          if (i < 0 || i >= size || j < 0 || j >= size) 
-            throw std::out_of_range("Array index out of bounds");
           this->members[j + 1] = this->members[j];
           j--;
         }

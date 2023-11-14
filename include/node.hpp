@@ -31,7 +31,7 @@ public:
    * @brief Adds a neighbour to the node.
    * @param neighbourId The label of the new neighbour.
    */
-  void addNeighbour(int neighbourId);
+  void addNeighbour(int auxLabel);
 
   /**
    * @brief Gets the colour of the node.

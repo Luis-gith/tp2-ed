@@ -1,7 +1,10 @@
 #include <iostream>
 #include <stdexcept>
+#include <chrono>
 #include "node.hpp"
 #include "graph.hpp"
+
+using namespace std::chrono;
 
 int main() {
   char mode;
@@ -39,6 +42,8 @@ int main() {
     std::cin >> colour;
     graph->getMembers()[i].setColour(colour);
   }
+
+  auto start = high_resolution_clock::now();
 
   switch (mode) {
     case 'b':
@@ -85,6 +90,12 @@ int main() {
   std::cout << std::endl;
 
   delete graph;
+  auto stop = std::chrono::high_resolution_clock::now();
+
+
+  auto duration = duration_cast<microseconds>(stop - start);
+
+  std::cout << std::endl << "tempo:" << duration.count() << std::endl;
 
   return 0;
 }
