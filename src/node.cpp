@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include <stdexcept>
 
 Node::Node() {
   this->label = 0;
@@ -24,6 +25,9 @@ int Node::getLabel() {
 }
 
 int* Node::getNeighbours() {
+  if(this->neighbours == nullptr)
+    throw::std::logic_error("Neighbours is null");
+
   return this->neighbours;
 }
 
@@ -32,8 +36,12 @@ int Node::getNumNeighbours() {
 }
 
 void Node::addNeighbour(int auxLabel) {
-  if (neighbours == nullptr) neighbours = new int[1];
-   
+  if (neighbours == nullptr) {
+    neighbours = new int[1];
+    if (!neighbours) {
+        throw std::bad_alloc();  // Memory allocation failed
+    }
+  }
   else {
     int* temp = new int[numNeighbours + 1];
     for (int i = 0; i < numNeighbours; i++) 
@@ -45,7 +53,3 @@ void Node::addNeighbour(int auxLabel) {
   
   neighbours[numNeighbours++] = auxLabel;
 }
-
-
-
-

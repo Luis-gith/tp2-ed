@@ -1,11 +1,21 @@
 #include <iostream>
+#include <stdexcept>
 #include "node.hpp"
 #include "graph.hpp"
 
 int main() {
   char mode;
   int numVertices;
-  std::cin >> mode >> numVertices;
+  try {
+    std::cin >> mode >> numVertices;
+
+    if (std::cin.fail() || numVertices <= 0)
+        throw std::invalid_argument("Invalid input for mode or number of vertices"); 
+  } 
+  catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+    return 1; 
+  }
 
   Graph* graph = new Graph(numVertices);
 
@@ -61,7 +71,8 @@ int main() {
       
 
     default:
-      break;
+      std::cerr << "Invalid sorting mode" << std::endl;
+      return 1; 
   }
     if(graph->greedy()){
       std::cout << 1 << " ";
@@ -77,5 +88,3 @@ int main() {
 
   return 0;
 }
-
-
